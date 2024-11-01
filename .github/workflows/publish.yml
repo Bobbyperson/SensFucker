@@ -6,7 +6,7 @@ on:
       - "*"
     
 env:
-  name: ${{github.event.repository.name}} # Edit this if the package name differs from the repo name
+  name: ${{github.event.repository.name}}
 
 jobs:
   verify:
@@ -33,18 +33,11 @@ jobs:
         uses: GreenTF/upload-thunderstore-package@v3.1
         with:
           community: northstar
-          # Name of the team to publish the mod under
-          # This should be modified if your github username is different than your team name on Thunderstore
-          namespace: ${{ github.repository_owner }} # <------ DOUBLE CHECK THIS
-          # Name of the package
-          name: ${{ env.name }} # This can be modified if the package name differs from the repo name
-          # Package version to publish
-          version: ${{ github.ref_name }} # This is the tag that was created in the release
-          # Description of the mod
-          description: Example mod description # <----------- UPDATE THIS
-          # Thunderstore API token
+          namespace: ${{ github.repository_owner }}
+          name: ${{ env.name }}
+          version: ${{ github.ref_name }}
+          description: Randomize your sensitivity every kill
           token: ${{ secrets.TS_KEY }} 
-          # Directory to wrap the contents of the repo in
-          wrap: mods/${{ github.repository_owner }}.${{ env.name }} # This will wrap your Author.ModName folder in a mods/ folder before publishing
-          #deps: "northstar-Northstar@1.9.3" # <------------- Uncomment this line to add dependencies to your mod, each sparated by a space
-          categories: "mods" # <----------------------------- Add more categories as needed, separated by spaces
+          wrap: mods/${{ github.repository_owner }}.${{ env.name }}
+          deps: "S2Mods-ClientKillCallback@2.0.1"
+          categories: "mods client-side"
